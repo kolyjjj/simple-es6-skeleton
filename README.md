@@ -13,4 +13,4 @@ install node & npm
 `gulp compile`
 
 ## run test
-`gulp run`
+`gulp run` or `gulp`
