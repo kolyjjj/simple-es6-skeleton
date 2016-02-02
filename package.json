@@ -1,0 +1,22 @@
+{
+  "name": "es6",
+  "version": "0.0.1",
+  "description": "an es6 for es6 practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "es6"
+  ],
+  "author": "koly",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-mocha": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0"
+  }
+}
