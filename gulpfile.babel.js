@@ -12,7 +12,8 @@ gulp.task('compile', ()=>{
   return gulp.src(['src/**/*.js', 'test/**/*.js'], {base: '.'})
   .pipe(fileCache.filter())
   .pipe(babel({
-    presets: ['es2015']
+    presets: ['es2015'],
+    plugins: ['transform-runtime']
   }))
   .pipe(fileCache.cache())
   .pipe(gulp.dest('tmp'));
