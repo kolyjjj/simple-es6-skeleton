@@ -1,1 +1,3 @@
-export const name = 'koly';
+'use strict';
+
+export var name = 'koly';
