@@ -4,14 +4,17 @@ import gulp from 'gulp';
 import sourcemaps from 'gulp-sourcemaps';
 import babel from 'gulp-babel';
 import mocha from 'gulp-mocha';
+import FileCache from 'gulp-file-cache';
+
+const fileCache = new FileCache();
 
 gulp.task('compile', ()=>{
   return gulp.src(['src/**/*.js', 'test/**/*.js'], {base: '.'})
-  .pipe(sourcemaps.init())
+  .pipe(fileCache.filter())
   .pipe(babel({
     presets: ['es2015']
   }))
-  .pipe(sourcemaps.write('.'))
+  .pipe(fileCache.cache())
   .pipe(gulp.dest('tmp'));
 });
 
