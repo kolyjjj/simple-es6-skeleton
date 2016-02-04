@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import range, {sayFullName} from '../../src/generator/index';
+import range, {sayFullName, async} from '../../src/generator/index';
 
 describe('generator test', ()=>{
   describe('as iterator', ()=>{
@@ -36,6 +36,23 @@ describe('generator test', ()=>{
       assert.deepEqual(say.next(), {value: 'first name', done: false});
       assert.deepEqual(say.next('koly'), {value: 'second name', done: false});
       assert.deepEqual(say.next('li'), {value: 'koly,li', done: true});
+    });
+  });
+
+  describe('handle async scenario', ()=>{
+    it('should return koly li given two async calls', function(done) {
+      // this doesn't work, because B is faster than A, and sequence is not 
+      this.timeout(100000);
+      async.printLaterA('koly').printLaterB('li')
+      .generator(function* gen(){
+        let firstName = yield;
+        let secondName = yield;
+        let fullName = firstName + ',' + secondName;
+        console.log(fullName);
+        assert.equal(fullName, 'koly,li');
+        done();
+      })
+      .run();
     });
   });
 });
