@@ -43,10 +43,12 @@ describe('generator test', ()=>{
     it('should return koly li given two async calls', function(done) {
       // this doesn't work, because B is faster than A, and sequence is not 
       this.timeout(100000);
-      async.printLaterA('koly').printLaterB('li')
-      .generator(function* gen(){
-        let firstName = yield;
-        let secondName = yield;
+      async
+      .printLaterA('koly')
+      .printLaterB('li')
+      .generator(function* gen(first, second){
+        let firstName = yield first();    // fire the first timeout
+        let secondName = yield second();  // the second timeout is fired in the first one
         let fullName = firstName + ',' + secondName;
         console.log(fullName);
         assert.equal(fullName, 'koly,li');

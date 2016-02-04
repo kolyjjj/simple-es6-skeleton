@@ -9,36 +9,31 @@ function* range(start, end){
 const async = {
   firstNameFunc: undefined,
   secondNameFunc: undefined,
-  gen: undefined,
+  genIterator: undefined,
   printLaterA(s) {
-    // simulate an async call
     this.firstNameFunc = ()=>{
       setTimeout(()=>{
-        console.log('first name timeout running');
-        this.gen.next(s);
+        this.genIterator.next(s);
       }, 3000);
     };
     return this;
   },
   printLaterB(s) {
     this.secondNameFunc = ()=>{
-      console.log('second name timeout running');
       setTimeout(()=>{
-        this.gen.next(s);
+        this.genIterator.next(s);
       }, 200);
     };
     return this;
   },
   generator(g) {
-    this.gen = g();
+    this.genIterator = g(this.firstNameFunc, this.secondNameFunc);
     return this;
   },
   run() {
     // fire the simulated async call
     console.log('running');
-    this.firstNameFunc();
-    this.secondNameFunc();
-    this.gen.next();
+    this.genIterator.next();
   }
 };
 
