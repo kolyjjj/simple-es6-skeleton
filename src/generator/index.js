@@ -6,4 +6,10 @@ function* range(start, end){
   }
 };
 
+export function* sayFullName() {
+  let firstName = yield 'first name';
+  let secondName = yield 'second name';
+  return firstName + ',' + secondName;
+}
+
 export default range;
