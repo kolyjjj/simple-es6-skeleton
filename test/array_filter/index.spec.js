@@ -3,7 +3,7 @@
 import assert from 'assert';
 import searchNames from '../../src/array_filter/index';
 
-describe.only('array filter', ()=>{
+describe('array filter', ()=>{
   describe('invalid input', ()=>{
     it('should return empty array given empty array', ()=>{
       assert.deepEqual(searchNames([]), []);
