@@ -4,16 +4,17 @@ import should from 'should';
 import {aPromise, anotherPromise, resolvedPromise, timeoutPromise} from '../../src/promise/promise';
 
 
-describe('promise', ()=>{
+describe('promise', _=>{
   it('should create a promise', function(done){
     this.timeout(3000);
     aPromise.should.be.an.instanceOf(Promise);
     // this will throw exception like done invoked with non-error
     //timeoutPromise.should.be.fulfilled().then(done, done); 
-    timeoutPromise.should.be.fulfilled().then(()=>done(), ()=>done());
+    timeoutPromise.should.be.fulfilled().then(_=>done(), _=>done());
   });
 
-  it('should be thenable', ()=>{
+  // cannot use _ => {..} here, don't know why
+  it('should be thenable', () =>{
     aPromise.should.have.property('then');
   });
 
@@ -26,7 +27,7 @@ describe('promise', ()=>{
   });
 
   it('should reject', function(done){
-    anotherPromise.then(()=>{}, err => {
+    anotherPromise.then(_=>{}, err => {
      err.should.be.exactly('error message'); 
     })
     .then(done, done);
@@ -35,7 +36,7 @@ describe('promise', ()=>{
   it('should get all resolved value using all', function(done){
     Promise.all([aPromise, resolvedPromise])
     .then(data => data.should.deepEqual([5, 'a good resolve']))
-    .then(()=>done(), ()=>done());
+    .then(_=>done(), _=>done());
   });
 
   it('should reject once one promise reject using promise all', function(done){
