@@ -5,7 +5,7 @@ import {aPromise, anotherPromise, resolvedPromise, timeoutPromise} from '../../s
 
 
 describe('promise', _=>{
-  it('should create a promise', function(done){
+  it('should be newed for creation', function(done){
     this.timeout(3000);
     aPromise.should.be.an.instanceOf(Promise);
     // this will throw exception like done invoked with non-error
@@ -35,8 +35,8 @@ describe('promise', _=>{
 
   it('should get all resolved value using all', function(done){
     Promise.all([aPromise, resolvedPromise])
-    .then(data => data.should.deepEqual([5, 'a good resolve']))
-    .then(_=>done(), _=>done());
+    .then(data => {data.should.deepEqual([5, 'a good resolve'])})
+    .then(done, done);
   });
 
   it('should reject once one promise reject using promise all', function(done){
@@ -54,4 +54,38 @@ describe('promise', _=>{
     })
     .then(done, done);
   });
+
+  it('catch is just like a then function with undefined success handler', function(done){
+   anotherPromise.catch(err => {
+     err.should.be.exactly('error message') ;
+   }) 
+   .then(done, done);
+  });
+
+  it('should chain', function(done){
+    aPromise.then(data=>resolvedPromise)
+    .then(data=>timeoutPromise)
+    .then(data => {
+      data.should.be.exactly('timeout promise');
+    })
+    .then(done, done);
+  })
+
+  it('should catch the first promise error', function(done){
+    anotherPromise.then(data=>aPromise)
+    .then(data=>resolvedPromise)
+    .catch(err=>{
+      err.should.be.exactly('error message');
+    })
+    .then(done, done);
+  });
+
+  it('shold catch the second promise error', function(done){
+    aPromise.then(data=>anotherPromise)
+    .then(data => resolvedPromise)
+    .catch(err=>{
+      err.should.be.exactly('error message');
+    })
+    .then(done, done);
+  })
 });

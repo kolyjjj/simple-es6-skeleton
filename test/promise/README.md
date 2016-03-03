@@ -1,5 +1,11 @@
 ES6 Promise learning
 ------------
+
+## promise states
+A promise has three states:
+* pending
+* fulfilled
+* rejected
 ## array function
 ```javascript
 (param1, param2, …, paramN) => { statements }
