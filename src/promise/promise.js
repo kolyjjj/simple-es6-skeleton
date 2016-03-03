@@ -1,7 +1,6 @@
 'use strict';
 
 const aPromise = new Promise(function(resolve, reject){
-  console.log('resolving');
   resolve(5);
 });
 

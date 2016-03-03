@@ -32,7 +32,6 @@ const async = {
   },
   run() {
     // fire the simulated async call
-    console.log('running');
     this.genIterator.next();
   }
 };

@@ -50,7 +50,6 @@ describe('generator test', ()=>{
         let firstName = yield first();    // fire the first timeout
         let secondName = yield second();  // the second timeout is fired in the first one
         let fullName = firstName + ',' + secondName;
-        console.log(fullName);
         assert.equal(fullName, 'koly,li');
         done();
       })

@@ -15,6 +15,5 @@ describe('Array', ()=>{
 describe('A test to test things imported', ()=>{
   it('should return koly given the name', ()=>{
     assert.equal('koly', name);
-    console.log('hello world');
   });
 });
