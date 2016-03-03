@@ -87,5 +87,10 @@ describe('promise', _=>{
       err.should.be.exactly('error message');
     })
     .then(done, done);
+  });
+
+  // if it is function(done), then done should be called somewhere inside the function
+  it('should not have finally property', function(){
+    aPromise.should.not.have.property('finally');
   })
 });
