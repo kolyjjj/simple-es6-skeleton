@@ -1,4 +1,4 @@
-Arrow function in ECMAScript 6
+[Arrow function in ECMAScript 6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 ------------------------
 ## basic syntax 
 ```javascript
@@ -25,5 +25,8 @@ params => ({foo: bar})
 var f = ([a, b] = [1, 2], {x: c} = {x: a + b}) => a + b + c;
 f();  // 6
 ```
+## lambda function
+A lambda function is a function that you can write inline your source code, usually to pass in to another function
 
-
+## yield
+the `yield` cannot be used inside an arrow function

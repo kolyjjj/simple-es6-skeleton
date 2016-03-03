@@ -59,4 +59,42 @@ describe.only('arrow function', _  => {
     aFunc([3,8]).should.be.exactly(11);
     aFunc([10]).should.be.NaN();
   });
+
+  it('rest parameters', ()=>{
+    // arguments not working in arrow functions
+    let aFunc = (...args) => args;
+    aFunc(1,2,3).should.deepEqual([1,2,3]);
+  });
+
+  it('lexical this', ()=>{
+    function Normal() {
+      this.age = 0;
+
+      this.getAge = function() {
+        increase();
+        return this.age;
+      };
+
+      function increase() {
+        // here this is undefined under nodejs environment
+        // this.age = this.age + 1;
+      }
+    }
+    let aNormal = new Normal();
+    aNormal.getAge().should.be.exactly(0);
+
+    // arrow functions captures the this value of the enclosing context
+    function Lexical() {
+      this.age = 0;
+
+      let increase = _ => {this.age = this.age + 1;};
+      this.getAge = _ => {
+        increase();
+        return this.age;
+      };
+    }
+
+    let aLexical = new Lexical();
+    aLexical.getAge().should.be.exactly(1);
+  });
 });
